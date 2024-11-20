@@ -2,9 +2,13 @@
 - hosts: all
   become: true
   tasks:
-    - name: Echo and Show whoami
+    - name: echo whoami
+      shell: whoami
+      register: whoami_result
+      become: no
+    - name: Show whoami
       debug:
-        msg: "{{ lookup('pipe', 'whoami') }} abcde"
+        var: whoami_result.stdout
     - name: update apt packages
       apt:
         upgrade: yes
