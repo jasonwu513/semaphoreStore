@@ -2,7 +2,15 @@
 - hosts: all
   become: true
   tasks:
+    - name: show whoami
+      command: whoami
     - name: update apt packages
       apt:
         upgrade: yes
         update_cache: yes
+    - name: update apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    
