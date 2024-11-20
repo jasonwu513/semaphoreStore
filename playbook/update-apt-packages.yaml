@@ -4,7 +4,7 @@
   tasks:
     - name: Echo and Show whoami
       debug:
-        msg: "{{ lookup('pipe', 'whoami') }}"
+        msg: "{{ lookup('pipe', 'whoami') }} abcde"
     - name: update apt packages
       apt:
         upgrade: yes
