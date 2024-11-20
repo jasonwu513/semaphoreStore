@@ -10,10 +10,12 @@
       debug:
         var: whoami_result.stdout
     - name: update apt packages
+      become: yes
       apt:
         upgrade: yes
         update_cache: yes
     - name: update apt packages
+      become: yes
       apt:
         upgrade: yes
         update_cache: yes
