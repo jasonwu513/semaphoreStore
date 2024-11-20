@@ -2,8 +2,9 @@
 - hosts: all
   become: true
   tasks:
-    - name: show whoami
-      command: whoami
+    - name: Echo and Show whoami
+      debug:
+        msg: "{{ lookup('pipe', 'whoami') }}"
     - name: update apt packages
       apt:
         upgrade: yes
