@@ -1,0 +1,32 @@
+---
+# install neovim
+
+- name: Install neovim
+  apt:
+    name: neovim
+    state: present
+  become: true
+
+- name: Backup existing Neovim configuration
+  command: mv /home/jasonwu513/.config/nvim /home/jasonwu513/.config/nvim.bak
+  args:
+    removes: /home/jasonwu513/.config/nvim.bak
+  ignore_errors: true
+  become: false
+
+- name: Clone LazyVim repository
+  git:
+    repo: https://github.com/LazyVim/starter.git
+    dest: /home/jasonwu513/.config/nvim
+  become: false
+
+- name: Change ownership of nvim configuration directory
+  ansible.builtin.file:
+    path: /home/jasonwu513/.config/nvim
+    state: directory
+    owner: jasonwu513
+    group: jasonwu513
+  become: true
+
+- name: Install lazyvim
+

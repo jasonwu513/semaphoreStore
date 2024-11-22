@@ -30,11 +30,11 @@
         update: yes
       when: is_mac
 
-    # - name: Ensure zsh is the default shell
-    #   user:
-    #     name: "{{ ansible_user }}"
-    #     shell: "/usr/bin/zsh"
-    #   become: true
+    - name: Ensure zsh is the default shell
+      user:
+        name: "{{ user }}"
+        shell: "/usr/bin/zsh"
+      become: true
 
     - name: Download Oh My Zsh installation script
       get_url:
@@ -75,14 +75,6 @@
         dest: "/home/jasonwu513/.p10k.zsh"
       become: false
 
-    # - name: Debug .zshrc content
-    #   shell: "cat /home/jasonwu513/.zshrc"
-    #   register: zshrc_content
-    #   become: false
-
-    # - name: Show content of .zshrc
-    #   debug:
-    #     var: zshrc_content.stdout
 
     - name: Update .zshrc to use Powerlevel10k
       lineinfile:
@@ -103,11 +95,3 @@
         dest: "/home/jasonwu513/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
       become: false
 
-    # - name: Final Debug .zshrc
-    #   shell: "cat /home/jasonwu513/.zshrc"
-    #   register: final_zshrc_content
-    #   become: true
-
-    # - name: Show final content of .zshrc
-    #   debug:
-    #     var: final_zshrc_content.stdout
