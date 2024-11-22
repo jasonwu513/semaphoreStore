@@ -1,29 +1,42 @@
 ---
 # install neovim
 
+# curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+# sudo rm -rf /opt/nvim
+# sudo tar -C /opt -xzf nvim-linux64.tar.gz
+
+- name: Downlaod neovim
+  get_url: 
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    dest: /tmp/nvim-linux64.tar.gz
+    mode: '0755'
+
+
+- name: Remove existing Neovim installation
+  ansible.builtin.command: rm -rf /opt/nvim
+  become: false
+
 - name: Install neovim
-  apt:
-    name: neovim
-    state: present
-  become: true
+  become: true 
+  ansible.builtin.command: tar -C /opt -xzf /tmp/nvim-linux64.tar.gz
 
 - name: Backup existing Neovim configuration
-  command: mv /home/jasonwu513/.config/nvim /home/jasonwu513/.config/nvim.bak
+  command: mv /home/{{ user }}/.config/nvim /home/{{ user }}/.config/nvim.bak
   args:
-    removes: /home/jasonwu513/.config/nvim.bak
+    removes: /home/{{ user }}/.config/nvim.bak
   ignore_errors: true
   become: false
 
 - name: Clone LazyVim repository
   git:
     repo: https://github.com/LazyVim/starter.git
-    dest: /home/jasonwu513/.config/nvim
+    dest: /home/{{ user }}/.config/nvim
   become: false
 
 - name: Change ownership of nvim configuration directory
   ansible.builtin.file:
-    path: /home/jasonwu513/.config/nvim
+    path: /home/{{ user }}/.config/nvim
     state: directory
-    owner: jasonwu513
-    group: jasonwu513
+    owner: "{{ user }}"
+    group: "{{ user }}"
   become: true
