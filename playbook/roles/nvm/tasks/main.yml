@@ -1,0 +1,40 @@
+---
+# install nvm
+
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+- name: Install nvm
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  become: false
+  args:
+    chdir: /home/jasonwu513
+  register: nvm_result
+  become: false
+
+# check if ~/.zshrc exists
+
+- name: Check if ~/.zshrc exists
+  stat:
+    path: /home/{{ user }}/.zshrc
+  register: zshrc_stat
+
+# append to ~/.zshrc if it exists
+
+- name: Append to ~/.zshrc
+  lineinfile:
+    path: /home/{{ user }}/.zshrc
+    line: |
+      export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  when: zshrc_stat.stat.exists
+  become: false
+
+# append to ~/.bashrc
+
+- name: Append to ~/.bashrc
+  lineinfile:
+    path: /home/{{ user }}/.bashrc
+    line: |
+      export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  become: false
