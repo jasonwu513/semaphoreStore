@@ -36,17 +36,6 @@
     #     shell: "/usr/bin/zsh"
     #   become: true
 
-    - name: Run Oh My Zsh installation script
-      command: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-      register: ohmyzsh_result
-      failed_when: "'FAILED' in ohmyzsh_result.stderr"
-      ignore_errors: false
-
-    - name: Show Oh My Zsh installation script stdout
-      debug:
-        var: ohmyzsh_result.stdout
-
-    - name: Show Oh My Zsh installation script stderr
-      debug:
-        var: ohmyzsh_result.stderr
-
+    - name: Install oh-my-zsh
+      shell: |
+        curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash --unattended
