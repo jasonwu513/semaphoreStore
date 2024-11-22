@@ -14,13 +14,6 @@
   become: true
 
 
-- name: Install dust
-  apt:
-    name: dust
-    state: present
-    update_cache: yes
-  become: true
-
 - name: Install ffmpeg
   apt:
     name: ffmpeg
