@@ -5,7 +5,7 @@
 # sudo rm -rf /opt/nvim
 # sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
-- name: Downlaod neovim
+- name: Download neovim
   get_url: 
     url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
     dest: /tmp/nvim-linux64.tar.gz
@@ -40,3 +40,19 @@
     owner: "{{ user }}"
     group: "{{ user }}"
   become: true
+
+- name: Add nvim to bash PATH
+  ansible.builtin.lineinfile:
+    path: /home/{{ user }}/.zshrc
+    regexp: '^export PATH=.*'
+    line: 'export PATH="$PATH:/opt/nvim-linux64/bin"'
+    insertafter: EOF
+  become: false
+
+- name: Add nvim to zsh PATH
+  ansible.builtin.lineinfile:
+    path: /home/{{ user }}/.bashrc
+    regexp: '^export PATH=.*'
+    line: 'export PATH="$PATH:/opt/nvim-linux64/bin"'
+    insertafter: EOF
+  become: false
