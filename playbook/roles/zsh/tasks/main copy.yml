@@ -1,0 +1,118 @@
+---
+  - name: check os
+    set_fact:
+      is_ubuntu: "{{ ansible_os_family == 'Debian' }}"
+      is_mac: "{{ ansible_os_family == 'Darwin' }}"
+  - name: echo whoami
+    shell: whoami
+    register: whoami_result
+    become: false
+  - name: Show whoami
+    debug:
+      var: whoami_result.stdout
+  - name:  Zsh (Ubuntu)
+    apt:
+      name: "{{ ['zsh']  }}"
+      state: present
+      update_cache: yes
+    when: is_ubuntu
+    become: true
+
+  - name: 安裝 Zsh (macOS)
+    homebrew:
+      name: zsh
+      state: present
+      update: yes
+    when: is_mac
+
+  - name: Ensure zsh is the default shell
+    user:
+      name: "{{ ansible_user }}"
+      shell: "/usr/bin/zsh"
+    become: true
+
+
+  - name: Download Oh My Zsh installation script
+    get_url:
+      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      dest: /tmp/install_ohmyzsh.sh
+
+  - name: Run Oh My Zsh installation script
+    command: sh /tmp/install_ohmyzsh.sh --unattended
+    register: ohmyzsh_result
+    failed_when: "'FAILED' in ohmyzsh_result.stderr"
+
+  - name: 停止執行 Playbook
+    debug:
+      msg: "Playbook 中斷，任務結束。"
+    failed_when: true
+
+  - name: 配置 Zsh
+    copy:
+      src: ./.zshrc
+      dest: /home/jasonwu513/.zshrc
+    when: is_ubuntu or is_mac
+
+  - name: 設定 Zsh 為預設 shell
+    shell: chsh -s $(which zsh)
+    when: is_ubuntu or is_mac
+
+
+
+  - name: 安裝 Powerlevel10k
+    git:
+      repo: https://github.com/romkatv/powerlevel10k.git
+      dest: /home/jasonwu513/.oh-my-zsh/custom/themes/powerlevel10k
+    become: false
+
+  - name: 配置 P10K
+    copy:
+      src: ./.p10k.zsh
+      dest: /home/jasonwu513/.p10k.zsh
+    become: false
+
+  - name: Debug1 .zshrc
+    shell: cat /home/jasonwu513/.zshrc
+    register: zshrc_content
+    become: false
+
+  - name: Show content of .zshrc
+    debug:
+      var: zshrc_content.stdout
+
+  - name: 更新 .zshrc 以使用 Powerlevel10k
+    lineinfile:
+      path: /home/jasonwu513/.zshrc
+      regexp: '^ZSH_THEME\s*=.*'
+      line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
+    when: is_ubuntu or is_mac
+
+
+# Install plugins (zsh-autosuggestions and zsh-syntax-highlighting)
+
+  - name: 安裝 zsh-autosuggestions
+    git:
+      repo: 
+        - 
+
+# truncate
+  # - name: 清空 /home/jasonwu513/.zshrc
+  #   shell: >
+  #     cd /home/jasonwu513/.zshrc
+  #     # show pwd at stdout
+  #     pwd
+
+
+  - name: Debug2 .zshrc
+    shell: cat /home/jasonwu513/.zshrc
+    register: zshrc_content
+    become: true
+
+  - name: Show content of .zshrc
+    debug:
+      var: zshrc_content.stdout
+
+
+  # - name: 設定 Zsh 為預設 shell
+  #   shell: chsh -s $(which zsh)
+  #   when: is_ubuntu or is_mac

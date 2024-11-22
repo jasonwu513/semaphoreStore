@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  remote_user: jasonwu513
+  roles:
+    - { role: zsh, become: yes }
+    # - { role: lvim, become: yes }
+    # - { role: docker, become: yes }
+    # - { role: tools, become: yes }
+    # - { role: timesync, become: yes }
+    # - { role: nvm, become: yes }
+    # - { role: go, become: yes }
+    # - { role: git, become: yes }
+    # - { role: ssh, become: yes }
+
+
+    
