@@ -10,8 +10,8 @@
     # - { role: tools, become: yes }
     # - { role: nvm, become: yes }
     # - { role: go, become: yes }
-    - { role: timezone, become: yes }
-    # - { role: Locale, become: yes }
+    # - { role: timezone, become: yes }
+    - { role: locale, become: yes }
     # - { role: ssh, become: yes }
     # - { role: git, become: yes }
     # - { role: resource.list, become: yes }

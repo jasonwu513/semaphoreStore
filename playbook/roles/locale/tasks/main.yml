@@ -1,0 +1,9 @@
+---
+# set timezone
+
+
+# show current locale
+
+- name: show current locale
+  command: locale
+  register: locale
