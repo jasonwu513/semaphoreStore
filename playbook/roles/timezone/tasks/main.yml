@@ -1,0 +1,17 @@
+---
+# set timezone
+
+
+# show current timezone by timedatectl
+
+- name: show current timezone
+  command: timedatectl
+  register: timezone
+
+- debug:
+    var: timezone.stdout
+
+# set timezone to Asia/Taipei
+
+- name: set timezone to Asia/Taipei
+  command: timedatectl set-timezone Asia/Taipei
