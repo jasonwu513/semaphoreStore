@@ -51,7 +51,7 @@
 
 - name: Add nvim to zsh PATH
   ansible.builtin.lineinfile:
-    path: /home/{{ user }}/.bashrc
+    path: /home/{{ user }}/.zshrc
     regexp: '^export PATH=.*'
     line: 'export PATH="$PATH:/opt/nvim-linux64/bin"'
     insertafter: EOF
