@@ -27,6 +27,3 @@
     owner: jasonwu513
     group: jasonwu513
   become: true
-
-- name: Install lazyvim
-
