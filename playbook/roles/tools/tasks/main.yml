@@ -21,11 +21,11 @@
     update_cache: yes
   become: true
 
-- name: Add fastfetch repository
-  apt_repository:
-    repo: ppa:zhangsongcui3371/fastfetch
-    state: present
-  become: true
+# - name: Add fastfetch repository
+#   apt_repository:
+#     repo: ppa:zhangsongcui3371/fastfetch
+#     state: present
+#   become: true
 
 - name: Install fastfetch
   apt:
