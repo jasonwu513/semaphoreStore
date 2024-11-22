@@ -8,8 +8,8 @@
     # - { role: lazyvim, become: yes }
     # - { role: docker, become: yes }
     # - { role: tools, become: yes }
-    - { role: nvm, become: yes }
-    # - { role: go, become: yes }
+    # - { role: nvm, become: yes }
+    - { role: go, become: yes }
     # - { role: git, become: yes }
     # - { role: ssh, become: yes }
     # - { role: resource.list, become: yes }

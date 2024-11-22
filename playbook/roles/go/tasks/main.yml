@@ -1,0 +1,48 @@
+---
+# install nvm
+
+# check if ~/.zshrc exists
+- name: Check if ~/.zshrc exists
+  stat:
+    path: /home/{{ user }}/.zshrc
+  register: zshrc_stat
+
+# install go
+
+- name: Download Go tarball
+  get_url:
+    url: https://golang.org/dl/go1.23.3.linux-amd64.tar.gz
+    dest: /tmp/go1.23.3.linux-amd64.tar.gz
+
+- name: Remove old Go installation
+  shell: rm -rf /usr/local/go
+  become: true
+
+- name: Extract Go tarball
+  unarchive:
+    src: /tmp/go1.23.3.linux-amd64.tar.gz
+    dest: /usr/local
+    remote_src: yes
+  become: true
+
+- name: Add Go to PATH in ~/.zshrc if it exists
+  lineinfile:
+    path: /home/{{ user }}/.zshrc
+    line: export PATH=$PATH:/usr/local/go/bin
+  when: zshrc_stat.stat.exists
+  become: false
+
+- name: Add Go to PATH in ~/.bashrc
+  lineinfile:
+    path: /home/{{ user }}/.bashrc
+    line: export PATH=$PATH:/usr/local/go/bin
+  become: false
+
+- name: Verify Go installation
+  shell: /usr/local/go/bin/go version
+  register: go_version
+  become: false
+
+- name: Print Go version
+  debug:
+    msg: "Go version installed: {{ go_version.stdout }}"
