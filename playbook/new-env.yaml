@@ -5,9 +5,9 @@
   roles:
     - { role: ntp, become: yes }
     # - { role: zsh, become: yes }
-    - { role: lazyvim, become: yes }
+    # - { role: lazyvim, become: yes }
     # - { role: docker, become: yes }
-    # - { role: tools, become: yes }
+    - { role: tools, become: yes }
     # - { role: nvm, become: yes }
     # - { role: go, become: yes }
     # - { role: git, become: yes }

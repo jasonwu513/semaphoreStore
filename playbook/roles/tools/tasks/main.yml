@@ -1,0 +1,42 @@
+---
+- name: Install btop
+  apt:
+    name: btop
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install dust
+  community.general.snap:
+    name: dust
+    state: present
+    class: yes
+  become: true
+
+
+- name: Install dust
+  apt:
+    name: dust
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install ffmpeg
+  apt:
+    name: ffmpeg
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Add fastfetch repository
+  apt_repository:
+    repo: ppa:zhangsongcui3371/fastfetch
+    state: present
+  become: true
+
+- name: Install fastfetch
+  apt:
+    name: fastfetch
+    state: present
+    update_cache: yes
+  become: true
