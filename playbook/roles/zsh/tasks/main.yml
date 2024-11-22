@@ -37,7 +37,7 @@
       become: true
 
     - name: Install ohmyzsh
-      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+      shell: "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       register: ohmyzsh_result
       failed_when: "'FAILED' in ohmyzsh_result.stderr"
       ignore_errors: false
