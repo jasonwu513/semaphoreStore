@@ -1,0 +1,16 @@
+---
+# install ntp server to sync time
+
+- name: Install ntp
+  apt:
+    name: ntp
+    state: present
+  become: true
+
+# restart ntp service
+
+- name: Restart ntp service
+  service:
+    name: ntp
+    state: restarted
+  become: true

@@ -48,6 +48,14 @@
       failed_when: "'FAILED' in ohmyzsh_result.stderr"
       ignore_errors: true
 
+    - name: Show Oh My Zsh installation script stdout
+      debug:
+        var: ohmyzsh_result.stdout
+
+    - name: Show Oh My Zsh installation script stderr
+      debug:
+        var: ohmyzsh_result.stderr
+
     - name: Configure Zsh
       copy:
         src: ./.zshrc
