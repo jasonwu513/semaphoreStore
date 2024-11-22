@@ -36,19 +36,30 @@
         shell: /bin/zsh
       become: true
 
-    - name: Install ohmyzsh
-      shell: "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      register: ohmyzsh_result
-      failed_when: "'FAILED' in ohmyzsh_result.stderr"
-      ignore_errors: false
-
-    - name: Show Oh My Zsh installation script stdout
-      debug:
-        var: ohmyzsh_result.stdout
-
-    - name: Show Oh My Zsh installation script stderr
-      debug:
-        var: ohmyzsh_result.stderr
+    - name: Install Oh My Zsh # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: ~/.oh-my-zsh
+        depth: 1
+    
+    - name: Install zsh-autosuggestions plugin # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        depth: 1
+    
+    - name: Install zsh-completions plugin # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-completions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+        depth: 1
+    
+    - name: Install zsh-syntax-highlighting plugin # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        depth: 1
+    
 
     # - name: Download NerdFonts
     #   ansible.builtin.get_url:
