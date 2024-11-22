@@ -3,6 +3,7 @@
   become: true
   remote_user: jasonwu513
   roles:
+    - { role: ntp, become: yes }
     - { role: zsh, become: yes }
     # - { role: lvim, become: yes }
     # - { role: docker, become: yes }
