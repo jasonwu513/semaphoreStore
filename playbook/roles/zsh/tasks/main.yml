@@ -50,25 +50,25 @@
       debug:
         var: ohmyzsh_result.stderr
 
-    - name: Download NerdFonts
-      ansible.builtin.get_url:
-        url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip
-        dest: "/home/{{ user }}/Meslo.zip"
+    # - name: Download NerdFonts
+    #   ansible.builtin.get_url:
+    #     url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip
+    #     dest: "/home/{{ user }}/Meslo.zip"
 
-    - name: Create temp directory
-      ansible.builtin.file:
-        path: "/home/{{ user }}/Meslo"
-        state: directory
-        mode: '0755'
+    # - name: Create temp directory
+    #   ansible.builtin.file:
+    #     path: "/home/{{ user }}/Meslo"
+    #     state: directory
+    #     mode: '0755'
 
-    - name: Install font files
-      ansible.builtin.unarchive:
-        src: "/home/{{ user }}/Meslo.zip"
-        dest: "/home/{{ user }}/Meslo"
+    # - name: Install font files
+    #   ansible.builtin.unarchive:
+    #     src: "/home/{{ user }}/Meslo.zip"
+    #     dest: "/home/{{ user }}/Meslo"
 
-    - name: Move font files to fonts directory
-      ansible.builtin.copy:
-        src: "/home/{{ user }}/Meslo"
-        dest: /usr/share/fonts/Meslo
-        owner: root
-      become: true
+    # - name: Move font files to fonts directory
+    #   ansible.builtin.copy:
+    #     src: "/home/{{ user }}/Meslo"
+    #     dest: /usr/share/fonts/Meslo
+    #     owner: root
+    #   become: true
