@@ -10,7 +10,7 @@
   community.general.snap:
     name: dust
     state: present
-    class: yes
+    classic: yes
   become: true
 
 
