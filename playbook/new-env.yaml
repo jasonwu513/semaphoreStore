@@ -12,6 +12,10 @@
     # - { role: go, become: yes }
     # - { role: git, become: yes }
     # - { role: ssh, become: yes }
+    # - { role: resource.list, become: yes }
+    # - { role: timzone, become: yes }
+    # - { role: Locale, become: yes }
 
 
-    
+
+    # setup at test environment at local 
