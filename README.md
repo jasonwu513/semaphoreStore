@@ -1,5 +1,16 @@
 # semaphoreStore
 
+## Git 設定
+
+### 1. 設定使用者名稱和電子郵件
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "
+```
+
+
+
 
 ## SSH 安全登錄教學
 

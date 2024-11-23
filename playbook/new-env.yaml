@@ -14,7 +14,7 @@
     - { role: locale, become: yes }
     # - { role: ssh, become: yes }
     # - { role: git, become: yes }
-    # - { role: resource.list, become: yes }
+    # - { role: resource.list, become: yes } 國網已接管 不更換
 
 
 
