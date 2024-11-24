@@ -11,6 +11,16 @@
     dest: /tmp/nvim-linux64.tar.gz
     mode: '0755'
 
+- name: Update apt cache
+  become: true
+  apt:
+    update_cache: yes
+
+- name: Install build-essential
+  become: true
+  apt:
+    name: build-essential
+    state: present
 
 - name: Remove existing Neovim installation
   ansible.builtin.command: rm -rf /opt/nvim
