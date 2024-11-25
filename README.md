@@ -38,7 +38,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 `ssh-copy-id` 可以自動將你的公鑰複製到遠端主機的 `authorized_keys` 文件中。
 
 ```bash
-ssh-copy-id username@remote_host
+ssh-copy-id -i /path/to/your/public_key.pub username@remote_host
 ```
 
 * `username@remote_host`:  遠端主機的用戶名和地址。
