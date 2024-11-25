@@ -15,7 +15,18 @@
     # - { role: ssh, become: yes }
     # - { role: git, become: yes }
     # - { role: resource.list, become: yes } 國網已接管 不更換
+    - { role: rust, become: yes }
+    - { role: yazi, become: yes }
 
 
 
     # setup at test environment at local 
+
+    # todo
+
+    ## create a user with sudo privilege
+    ## install openssh in cloud server
+    ## proxmox agent
+    ## set up ufw
+    ## install and setup fail2ban
+    ## Install starship for bash
