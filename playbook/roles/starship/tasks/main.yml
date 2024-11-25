@@ -6,12 +6,15 @@
     url: https://starship.rs/install.sh
     dest: /tmp/install.sh
     mode: '0755'
+  become: false
 
 # install starship
 
 - name: Run install.sh
-  shell: /tmp/install.sh
-  become: false
+  shell: /tmp/install.sh --yes
+  become: true
+  args:
+    executable: /bin/bash
 
 # source starship
 - name: Source starship
