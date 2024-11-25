@@ -1,0 +1,20 @@
+---
+# install yazi
+
+# update rust
+
+- name: update rust
+  shell: rustup update
+  become: false
+
+- name: Install build-essential
+  become: true
+  apt:
+    name: build-essential
+    state: present
+
+# install yazi
+
+- name: install yazi
+  shell: cargo install --locked yazi-fm yazi-cli
+  become: false
