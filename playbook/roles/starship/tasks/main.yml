@@ -1,0 +1,22 @@
+---
+
+# Download starship
+- name: Download starship
+  get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/install.sh
+    mode: '0755'
+
+# install starship
+
+- name: Run install.sh
+  shell: /tmp/install.sh
+  become: false
+
+# source starship
+- name: Source starship
+  lineinfile:
+    path: /home/{{ user }}/.bashrc
+    line: |
+      eval "$(starship init bash)"
+  become: false

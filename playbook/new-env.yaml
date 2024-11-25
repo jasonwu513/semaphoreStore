@@ -3,20 +3,23 @@
   become: true
   remote_user: jasonwu513
   roles:
-    - { role: ntp, become: yes }
-    - { role: zsh, become: yes }
-    - { role: lazyvim, become: yes }
-    - { role: docker, become: yes }
-    - { role: tools, become: yes }
-    - { role: nvm, become: yes }
-    - { role: go, become: yes }
-    - { role: timezone, become: yes }
-    - { role: locale, become: yes }
+    # - { role: ntp, become: yes }
+    # - { role: zsh, become: yes }
+    # - { role: lazyvim, become: yes }
+    # - { role: docker, become: yes }
+    # - { role: tools, become: yes }
+    # - { role: nvm, become: yes }
+    # - { role: go, become: yes }
+    # - { role: timezone, become: yes }
+    # - { role: locale, become: yes }
+    # - { role: rust, become: yes }
+    # - { role: yazi, become: yes }
+
+    # - { role: gh, become: yes }
+    - { role: starship, become: yes }
     # - { role: ssh, become: yes }
     # - { role: git, become: yes }
     # - { role: resource.list, become: yes } 國網已接管 不更換
-    - { role: rust, become: yes }
-    - { role: yazi, become: yes }
 
 
 
