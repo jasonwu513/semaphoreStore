@@ -5,6 +5,7 @@
   apt:
     name: ntp
     state: present
+    update_cache: yes
   become: true
 
 # restart ntp service
