@@ -1,11 +1,22 @@
 ---
 # install yazi
 
+
+# souce rust
+
+- name: source rust
+  shell: source ~/.bashrc
+  become: false
+  args:
+    executable: /bin/bash
+
 # update rust
 
 - name: update rust
   shell: rustup update
   become: false
+  args:
+    executable: /bin/bash
 
 - name: Install build-essential
   become: true
@@ -18,3 +29,5 @@
 - name: install yazi
   shell: cargo install --locked yazi-fm yazi-cli
   become: false
+  args:
+    executable: /bin/bash
