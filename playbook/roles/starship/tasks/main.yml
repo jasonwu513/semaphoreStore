@@ -4,14 +4,14 @@
 - name: Download starship
   get_url:
     url: https://starship.rs/install.sh
-    dest: /tmp/install.sh
+    dest: /tmp/starship_install.sh
     mode: '0755'
   become: false
 
 # install starship
 
 - name: Run install.sh
-  shell: /tmp/install.sh --yes
+  shell: /tmp/starship_install.sh --yes
   become: true
   args:
     executable: /bin/bash
